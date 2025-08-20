@@ -32,4 +32,31 @@ public class CadastroAluno {
         return this.alunos;
     }
 
+    public double calcularMedia() {
+        double somaNotas = 0;
+        for (Aluno aluno : alunos) {
+            somaNotas += aluno.getNota();
+        }
+        return somaNotas / alunos.size();
+    }
+
+    public Aluno getAlunoComMaiorNota() {
+        Aluno maiorNotaAluno = null;
+        for (Aluno aluno : alunos) {
+            if (maiorNotaAluno == null || aluno.getNota() > maiorNotaAluno.getNota()) {
+                maiorNotaAluno = aluno;
+            }
+        }
+        return maiorNotaAluno;
+    }
+
+    public Aluno getAlunoComMenorNota() {
+        Aluno menorNotaAluno = null;
+        for (Aluno aluno : alunos) {
+            if (menorNotaAluno == null || aluno.getNota() < menorNotaAluno.getNota()) {
+                menorNotaAluno = aluno;
+            }
+        }
+        return menorNotaAluno;
+    }
 }

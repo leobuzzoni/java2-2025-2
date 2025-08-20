@@ -16,5 +16,4 @@ public class Aluno {
     public double getNota() {
         return this.nota;
     }
-
 }
