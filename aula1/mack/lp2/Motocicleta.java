@@ -1,8 +1,10 @@
 package mack.lp2;
 
-public abstract class Motocicleta extends Veiculo{
+public class Motocicleta extends Veiculo {
+
     @Override
-    public void andar(){
-        System.out.println("Pilotar moto");
+    public void andar() {
+        System.out.println("andar na moto - pizza chegando");
     }
+
 }
