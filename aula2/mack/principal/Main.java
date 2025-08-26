@@ -28,7 +28,6 @@ public class Main {
                 double nota = Double.parseDouble(scan.nextLine());
 
                 cad.cadastrar(nome, nota);
-
             } catch (NumberFormatException nfe) {
                 System.out.println("Nota digitada inválida.");
             } catch (NotaInvalidaException e) {
