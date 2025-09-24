@@ -34,8 +34,50 @@ public class TitularAppApplication implements CommandLineRunner {
 		}
 	}
 
-	public void listar() {
+	public void buscar() {
 		long id = Long.parseLong(input("Número do titular a ser buscado: "));
+		Titular t = titularrepo.findById(id).orElse(null);
+
+		if (t != null) {
+			System.out.println("Titular encontrado: ");
+			System.out.println(t);
+		} else {
+			System.out.println("Titular não encontrado.");
+		}
+	}
+
+	public void alterar() {
+		long id = Long.parseLong(input("Número do titular a ser alterado: "));
+		Titular t = titularrepo.findById(id).orElse(null);
+
+		if (t != null) {
+			String novoNome = input("Novo nome do titular (deixe em branco para não alterar): ");
+			if (!novoNome.isEmpty()) {
+				t.setNome(novoNome);
+			}
+
+			String novoCpf = input("Novo CPF do titular (deixe em branco para não alterar): ");
+			if (!novoCpf.isEmpty()) {
+				t.setCpf(novoCpf);
+			}
+
+			titularrepo.save(t);
+			System.out.println("Titular alterado com sucesso!");
+		} else {
+			System.out.println("Titular não encontrado.");
+		}
+	}
+
+	public void apagar() {
+		long id = Long.parseLong(input("Número do titular a ser apagado: "));
+		Titular t = titularrepo.findById(id).orElse(null);
+
+		if (t != null) {
+			titularrepo.delete(t);
+			System.out.println("Titular apagado com sucesso!");
+		} else {
+			System.out.println("Titular não encontrado.");
+		}
 	}
 
 	@Override
@@ -45,6 +87,8 @@ public class TitularAppApplication implements CommandLineRunner {
 		String menu = "\n(1) Listar todos os titulares";
 		menu += "\n(2) Buscar um titular específico pelo número";
 		menu += "\n(3) Criar novo titular";
+		menu += "\n(4) Alterar os dados do titular";
+		menu += "\n(5) Apagar um titular";
 		menu += "\n(0) Sair \n";
 		menu += "Escolha uma opção: ";
 
@@ -59,6 +103,12 @@ public class TitularAppApplication implements CommandLineRunner {
 					break;
 				case "3":
 					criar();
+					break;
+				case "4":
+					alterar();
+					break;
+				case "5":
+					apagar();
 					break;
 				case "0":
 					sair = true;
